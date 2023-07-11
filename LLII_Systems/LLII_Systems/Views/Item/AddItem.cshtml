@@ -1,0 +1,311 @@
+﻿@model LLII_Systems.Models.Item
+
+@{
+    ViewBag.Title = "New Item";
+}
+
+<style>
+    /* Styles for form containers, labels, and controls */
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 5px;
+        background-color: #fff;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-top: 5px;
+    }
+
+    .text-danger {
+        color: #dc3545;
+    }
+
+    .btn-primary {
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+
+
+    /* Center align the previous and next buttons */
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+        align-content: center;
+    }
+
+    #saveButton {
+        display: none;
+    }
+
+    #prevButton {
+        display: none;
+    }
+</style>
+<div class="container d-lg-block d-md-block">
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="single-item-tab" data-bs-toggle="pill" href="#single-item" role="tab" aria-controls="single-item" aria-selected="true">Single Item</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="multiple-items-tab" data-bs-toggle="pill" href="#multiple-items" role="tab" aria-controls="multiple-items" aria-selected="false">Multiple Items</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="single-item" role="tabpanel" aria-labelledby="single-item-tab">
+            @using (Html.BeginForm("InsertItem", "item", FormMethod.Post, new { autocomplete = "off" }))
+            {
+                <div class="py-1">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12">
+                            @Html.AntiForgeryToken()
+                            <div class="form-container" style="height:100%">
+                                <h4 class="text-center mb-4">Item Record</h4>
+                                <h4>Item Information</h4>
+                                <hr />
+                                <div class="mb-3">
+                                    <div class="form-group row">
+                                        <div class="col">
+                                            @Html.LabelFor(model => model.item_code, "Item Code", new { @class = "form-label" })
+                                            @Html.EditorFor(model => model.item_code, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.item_code, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col">
+                                            @Html.LabelFor(model => model.item_source, "Source", new { @class = "form-label" })
+                                            @Html.DropDownListFor(m => m.item_source, new SelectList(new[]
+                                                {
+                                                    new SelectListItem { Text = "Local", Value = "local" },
+                                                    new SelectListItem { Text = "Import", Value = "import" }
+                                                }, "Value", "Text"), "Select a source", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.item_source, "", new { @class = "text-danger" })
+
+                                        </div>
+                                        <div class="col">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-group row">
+                                        <div class="col">
+                                            @Html.LabelFor(model => model.item_desc, "Item Description", new { @class = "form-label" })
+                                            @Html.EditorFor(model => model.item_desc, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.item_desc, "", new { @class = "text-danger" })
+
+                                        </div>
+                                        <div class="col">
+
+                                            @Html.LabelFor(model => model.shelf_life, "Shelf Life (in days)", new { @class = "form-label" })
+                                            @Html.EditorFor(model => model.shelf_life, new { htmlAttributes = new { @class = "form-control", placeholder = "0", min = "0" } })
+                                            @*@Html.ValidationMessageFor(model => model.shelf_life, "", new { @class = "text-danger" })*@
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                @Html.LabelFor(model => model.perishable, "Origin (Perishable or Non-Perishable)", new { @class = "form-check-label" })
+                                                @Html.CheckBoxFor(model => model.perishable, new { @class = "form-check-input" })
+                                                @Html.ValidationMessageFor(model => model.perishable, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="mb-3">
+                                    <div class="form-group row">
+                                        <div class="col">
+                                            @Html.LabelFor(model => model.item_cat, "Category", new { @class = "form-label" })
+                                            @Html.DropDownListFor(model => model.item_cat.Id, (SelectList)ViewBag.Categories, "Select a category", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.item_cat.Id, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col">
+                                            @Html.LabelFor(model => model.item_sub_cat, "Sub Category", new { @class = "form-label" })
+                                            @Html.DropDownListFor(model => model.item_sub_cat.Id, (SelectList)ViewBag.SubCategories, "Select a sub category", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.item_sub_cat.Id, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col">
+
+                                        </div>
+
+
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col">
+
+                                        </div>
+                                        <div class="col">
+
+                                        </div>
+                                        <div class="col">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="mb-4">
+                                    <div class="form-group row">
+                                        <div class="col">
+
+                                        </div>
+                                        <div class="col">
+
+                                        </div>
+                                        <div class="col">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div style="float:right;margin-bottom:5px;">
+
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+            }
+
+        </div>
+        <div class="tab-pane fade" id="multiple-items" role="tabpanel" aria-labelledby="multiple-items-tab">
+            @using (Html.BeginForm("InsertItems", "item", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="py-1">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12">
+                            @Html.AntiForgeryToken()
+                            <div class="form-container">
+                                <h4 class="text-center mb-4">Multiple Item Records</h4>
+                                <h4>Upload Excel Csv file format</h4>
+                                <hr />
+                                <div class="mb-3">
+                                    <div class="form-group">
+                                        <label class="form-label" for="file">CSV File</label>
+                                        <input type="file" class="form-control-file" id="file" name="file">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-group">
+                                        <div class="pull-right">
+                                            <button type="submit" class="btn btn-success">Upload</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script>
+        // Script for managing form steps
+        //var currentStep = 1;
+        //var formSteps = document.getElementsByClassName("form-step");
+        //var prevButton = document.getElementById("prevButton");
+        //var nextButton = document.getElementById("nextButton");
+        //var saveButton = document.getElementById("saveButton");
+
+        // Hide all form steps except the first one
+        //for (var i = 1; i < formSteps.length; i++) {
+        //    formSteps[i].style.display = "none";
+        //}
+
+        // Function to show the next form step
+        //function nextStep() {
+        //     Validate the current step before proceeding
+        //    if (validateStep(currentStep)) {
+        //        formSteps[currentStep - 1].style.display = "none";
+        //        formSteps[currentStep].style.display = "block";
+        //        currentStep++;
+
+        //         Hide or show previous/next buttons
+        //        if (currentStep === formSteps.length) {
+        //            nextButton.style.display = "none";
+        //            saveButton.style.display = "block";
+        //        } else {
+        //            prevButton.style.display = "block";
+        //            nextButton.style.display = "block";
+        //            saveButton.style.display = "none";
+        //        }
+        //    }
+        //}
+        //function saveStep() {
+        //     //Validate the current step before proceeding
+        //    if (validateStep(currentStep)) {
+        //        formSteps[currentStep - 1].style.display = "none";
+        //        formSteps[currentStep].style.display = "block";
+        //        currentStep++;
+
+        //    }
+        //}
+
+        // Function to show the previous form step
+        //function previousStep() {
+        //    formSteps[currentStep - 1].style.display = "none";
+        //    formSteps[currentStep - 2].style.display = "block";
+        //    currentStep--;
+
+        //     Hide or show previous/next buttons
+        //    if (currentStep === 1) {
+        //        prevButton.style.display = "none";
+        //    } else {
+        //        prevButton.style.display = "block";
+        //    }
+
+        //    nextButton.style.display = "block";
+        //    saveButton.style.display = "none";
+        //}
+
+        // Function to validate the current step
+        //function validateStep() {
+        //    var isValid = true;
+        //    var currentForm = formSteps[step - 1];
+        //    var inputFields = currentForm.getElementsByTagName("input");
+        //    var selectFields = currentForm.getElementsByTagName("select");
+
+        //     //Validate input fields
+        //    for (var i = 0; i < inputFields.length; i++) {
+        //        var inputField = inputFields[i];
+        //        if (inputField.value.trim() === "") {
+        //            isValid = false;
+        //            inputField.classList.add("is-invalid");
+        //        } else {
+        //            inputField.classList.remove("is-invalid");
+        //        }
+        //    }
+
+        //     //Validate dropdowns
+        //    for (var i = 0; i < selectFields.length; i++) {
+        //        var selectField = selectFields[i];
+        //        if (selectField.value === "") {
+        //            isValid = false;
+        //            selectField.classList.add("is-invalid");
+        //        } else {
+        //            selectField.classList.remove("is-invalid");
+        //        }
+        //    }
+
+        //    return isValid;
+        //}
+</script>
+

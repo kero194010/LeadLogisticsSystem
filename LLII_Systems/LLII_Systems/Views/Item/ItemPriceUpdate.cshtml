@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "Price Update";
+}
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="py-1">
+        <div class="row">
+            <div class="col-lg-6">
+                @Html.AntiForgeryToken()
+                <div class="form-container ">
+                    <h3 class="text-center mb-4">Reminders</h3>
+
+                    <hr />
+
+                    <ul class="text-muted">
+                        <li>Make sure your CSV file follows the correct format, with data organized in columns and rows.</li>
+                        <li>Double-check the data in your CSV file for accuracy before uploading, especially if it contains important or sensitive information.</li>
+                        <li>If the upload process encounters any errors, check for any error messages or prompts that may help you troubleshoot the issue.</li>
+                        <li>Keep in mind any file size limitations or restrictions that the upload form or application may have.</li>
+                        <li>Consider keeping a backup copy of your CSV file in case you need to refer back to it or re-upload it in the future.</li>
+                        <li>Ensure that your file does not exceed the maximum allowed file size. For example, the maximum file size may be 10 MB.</li>
+                    </ul>
+                   <a href="@Url.Action("DownloadTemplate", "Item")" class="btn btn-primary" download>Download Template CSV</a>
+
+                </div>
+            </div>
+            <div class="col-lg-6">
+                @Html.AntiForgeryToken()
+                <div class="form-container text-center">
+                    <h3 class="text-center mb-4">Price Update</h3>
+                    <hr />
+                    <div class="mb-3">
+                        <div class="form-group">
+                            <input type="file" class="form-control-file" id="file" name="file" onchange="displayFileSize()">
+                        </div>
+                        <small id="fileSize" class="form-text"></small>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-group">
+                            <div class="">
+                                <button type="submit" class="btn btn-success" id="uploadButton" disabled>Upload</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    function displayFileSize() {
+        const fileInput = document.getElementById('file');
+        const fileSizeText = document.getElementById('fileSize');
+        const uploadButton = document.getElementById('uploadButton');
+
+        if (fileInput.files && fileInput.files[0]) {
+            const fileSize = fileInput.files[0].size;
+            const fileSizeInMB = (fileSize / (1024 * 1024)).toFixed(2);
+
+        
+
+            if (fileSize > 10 * 1024 * 1024) {
+                fileSizeText.style.color = 'red';
+                fileSizeText.textContent = `Selected file size: ${fileSizeInMB} MB`;
+                uploadButton.disabled = true;
+            } else {
+                fileSizeText.textContent = `Selected file size: ${fileSizeInMB} MB`;
+                fileSizeText.style.color = '';
+                uploadButton.disabled = false;
+            }
+        } else {
+            fileSizeText.textContent = "";
+            fileSizeText.style.color = '';
+            uploadButton.disabled = true;
+        }
+    }
+</script>
+
+
+
+@*<div class="div-border">
+        <table class="table table-bordered table-striped table-responsive" id="myTable">
+            <thead>
+                <tr class="table-dark">
+                    <th>Item Code</th>
+                    <th>Description</th>
+                    <th>Standard Price</th>
+                    <th>Effective Date</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>*@

@@ -1,0 +1,123 @@
+﻿@model LLII_Systems.Models.ItemDetailViewModel
+<div class="row">
+    <div class="col-md-2 justify-content-center center-block">
+        <div class="item-card">
+            <img src="~/Content/Images/product_image.jpg" style="width:100%;height:300px;" />
+
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="mb-1">
+
+            <div class="form-group row">
+
+                <div class="col">
+                    @Html.LabelFor(model => model.ItemDetail.item_code, "Item Code", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.ItemDetail.item_code, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.ItemDetail.item_code, "", new { @class = "text-danger" })
+                </div>
+                <div class="col">
+                    @Html.LabelFor(model => model.ItemDetail.item_desc, "Item Description", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.ItemDetail.item_desc, new { htmlAttributes = new { @class = "form-control enableButton", disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.ItemDetail.item_desc, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col">
+                    @Html.LabelFor(model => model.ItemDetail.shelf_life, "Shelf Life(in days)", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.ItemDetail.shelf_life, new { htmlAttributes = new { @class = "form-control enableButton", disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.ItemDetail.shelf_life, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col">
+                    <div class="form-check">
+                        @Html.LabelFor(model => model.ItemDetail.perishable, "Perishable or Non-Perishable", new { @class = "form-check-label" })
+                        @Html.CheckBoxFor(model => model.ItemDetail.perishable, new { @class = "form-check-input enableButton", disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ItemDetail.perishable, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-check">
+                        @Html.LabelFor(model => model.ItemDetail.vat_indicator, "Tax Schedule(Vatable or Non-Vatable)", new { @class = "form-check-label" })
+                        @Html.CheckBoxFor(model => model.ItemDetail.vat_indicator, new { @class = "form-check-input enableButton", disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.ItemDetail.vat_indicator, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="mb-1">
+            <div class="form-group row">
+                <div class="col">
+                    @Html.LabelFor(model => model.ItemDetail.item_cat.Id, "Category", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.ItemDetail.item_cat.Id, (SelectList)ViewBag.Categories, "Select a category", new { @class = "form-control enableButton", disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ItemDetail.item_cat.Id, "", new { @class = "text-danger" })
+                </div>
+                <div class="col">
+                    @Html.LabelFor(model => model.ItemDetail.item_sub_cat.Id, "Sub Category", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.ItemDetail.item_sub_cat.Id, (SelectList)ViewBag.SubCategories, "Select a sub category", new { @class = "form-control enableButton", disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ItemDetail.item_sub_cat.Id, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col">
+                   
+
+                </div>
+                <div class="col">
+
+                </div>
+            </div>
+        </div>
+        <div class="mb-1">
+            <div class="form-group row">
+                <div class="col">
+                    @Html.LabelFor(model => model.ItemDetail.mother_code, "Mother Code", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.ItemDetail.mother_code, new { htmlAttributes = new { @class = "form-control enableButton", disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.ItemDetail.mother_code, "", new { @class = "text-danger" })
+                </div>
+                <div class="col">
+
+                </div>
+                <div class="col">
+
+                </div>
+
+                <div class="col">
+
+                    @Html.EditorFor(model => model.ItemDetail.id, new { htmlAttributes = new { @class = "form-control enableButton d-none", @readonly = "readonly" } })
+
+                </div>
+            </div>
+
+        </div>
+        <div class="mb-1">
+            <div class="form-group row">
+                <div class="col">
+                    @Html.LabelFor(model => model.ItemDetail.item_source, "Origin", new { @class = "form-label" })
+                    @Html.DropDownListFor(m => m.ItemDetail.item_source, new SelectList(new[]
+                      {
+                          new SelectListItem { Text = "Local", Value = "local" },
+                          new SelectListItem { Text = "Import", Value = "import" }
+                      }, "Value", "Text"), "Select a origin", new { @class = "form-control enableButton", disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ItemDetail.item_source, "", new { @class = "text-danger" })
+                </div>
+                <div class="col">
+
+                </div>
+                <div class="col">
+
+                </div>
+
+                <div class="col">
+
+               
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="item-card">
+           @* <img src="~/Content/Images/QR_sample.png" style="width:150px;height:100%;" />*@
+
+        </div>
+    </div>
+</div>

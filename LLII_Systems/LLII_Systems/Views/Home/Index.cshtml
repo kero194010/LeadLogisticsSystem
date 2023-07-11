@@ -1,0 +1,225 @@
+﻿@model LLII_Systems.Models.item
+@{
+    ViewBag.Title = "Home";
+}
+<style>
+    .card_news {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        height: auto;
+    }
+    .card {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        height: 200px;
+    }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+    .card-title {
+        font-size: 16px;
+        margin-bottom: 1px;
+        padding: 10px;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        align-content:center
+    }
+
+    .card-text {
+        color: #777;
+    }
+
+    .card-link {
+        color: #333;
+        font-weight: bold;
+    }
+    .card-body ul li {
+        color: #777;
+        font-size: 15px;
+    }
+    .avatar {
+        vertical-align: middle;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: .5px solid black;
+    }
+    .card-body-new-and-updates {
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        border-radius: .5rem;
+        margin-bottom: 5px;
+    }
+</style>
+<div class="row">
+    <div class="col">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card_news mb-4">
+                        <div class="card-title bg-success">News and Updates</div>
+                        <div class="card-body-new-and-updates">
+                            @*<iframe src="https://www.leadlogistics.com.ph/ews/what-we-do/" width="100%" height="718"></iframe>*@
+                            <div class="row" style="padding:15px;">
+                                <div class="col-lg-2 d-block">
+                                    <img class="avatar" src="~/Content/Images/avatar-img.jpg" />
+                                </div>
+                                <div class="col-lg-10">
+                                    <h4>Lead Logistics Innovations Inc.</h4>
+                                    <p>
+                                        Eid Mubarak! Wishing you and your loved ones a blessed and joyous Eid al-Adha. ✨🌙
+                                        #EidAlAdha #EidMubarak
+                                    </p>
+                                </div>
+                            </div>                         
+                        </div>
+                        <div class="card-body-new-and-updates">
+                            @*<iframe src="https://www.leadlogistics.com.ph/ews/what-we-do/" width="100%" height="718"></iframe>*@
+                            <div class="row" style="padding:15px;">
+                                <div class="col-lg-2 d-block">
+                                    <img class="avatar" src="~/Content/Images/avatar-img.jpg" />
+                                </div>
+                                <div class="col-lg-10">
+                                    <h4>Lead Logistics Innovations Inc.</h4>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="col-lg-6 col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Sales Order</h5>
+                            <progress id="html" min="0" max="100" value="50"></progress>
+                            <a href="#" class="card-link">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Widget 2</h5>
+                            <p class="card-text">This is the content of Widget 2.</p>
+                            <a href="#" class="card-link">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Widget 3</h5>
+                            <p class="card-text">This is the content of Widget 3.</p>
+                            <a href="#" class="card-link">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Widget 4</h5>
+                            <p class="card-text">This is the content of Widget 4.</p>
+                            <a href="#" class="card-link">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Widget 5</h5>
+                            <p class="card-text">This is the content of Widget 5.</p>
+                            <a href="#" class="card-link">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Widget 6</h5>
+                            <p class="card-text">This is the content of Widget 6.</p>
+                            <a href="#" class="card-link">View Details</a>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="container ">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card mb-4" style="height:auto">
+                        <div class="card-title bg-dark text-center">WHO WE ARE</div>
+                        <div class="card-body">
+
+                            <p class="card-text">
+                                Lead Logistics Innovations, Inc. (LLII) was established in 2017. As a leader in logistics, We integrate services to provide customers total and customized solutions.
+
+                                We provide supply chain management services related to order management, supply planning, demand planning, inventory planning, procurement, freight management, transport management, warehouse management, quality management focusing on food safety compliance, good warehousing practice (GWP) and value added services.
+
+                                As our first mission, we provided a logistics solution for the world’s biggest QSR brand, establishing an assured supply for its restaurants in Mindanao. This is in accordance with the original business intent to provide break-through logistics services that will reinforce the business growth of our client.
+
+                               
+                            </p>
+                            <h6 class="fw-bolder text-center"> A GADC Company</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-6 col-md-12">
+                    <div class="card mb-4">
+                        <div class="card-title bg-dark">Vision</div>
+                        <div class="card-body">
+
+                            <p class="card-text">To see a future where LLI has operations in all major Cities. Serving all areas nationwide.</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="card mb-4">
+                        <div class="card-title bg-dark">Core Values</div>
+                        <div class="card-body">
+                            <ul>
+                                <li>Integrity</li>
+                                <li>Grit</li>
+                                <li>Malasakit</li>
+                                <li>Result-Oriented</li>
+                                <li>Customer Centric</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="card mb-4">
+                        <div class="card-title bg-dark">Purpose</div>
+                        <div class="card-body">
+                            <p class="card-text">Bringing life through innovative Logistics Solutions.</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="card mb-4">
+                        <div class="card-title bg-dark">Mission</div>
+                        <div class="card-body">
+
+                            <p class="card-text">Engaging with customers who want to grow their presence/ business even up to difficult-to-reach areas by providing innovative Supply Chain Solutions.</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

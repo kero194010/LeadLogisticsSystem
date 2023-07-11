@@ -1,0 +1,59 @@
+﻿@model List<LLII_Systems.Models.item>
+@{
+    ViewBag.Title = "Store List";
+}
+
+<style>
+</style>
+
+<div style="margin-top:1%"></div>
+
+<h2 class="text-primary"><strong><i class="fa fa-2xl fa-ticket fa-lg pull-left" aria-hidden="true"></i>Item List - GADC Items</strong></h2>
+<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+
+<div class="">
+    <a href="@Url.Action("", "")" class="" title="Export CSV"><i class="fas fa-2xl fa-file-csv fa-lg"></i></a>
+    <a href="@Url.Action("", "")" class="" title="Export Excel"><i class="fas fa-2xl fa-file-excel fa-lg"></i></a>
+    <a href="@Url.Action("", "")" class="" title="Export PDF"><i class="fas fa-2xl fa-file-pdf fa-lg"></i></a> |
+</div>
+
+<div class="container">
+    <div class="email">
+        <div class="sender">Actions</div>
+        <div class="sender">Category</div>
+        <div class="sender">ID</div>
+        <div class="subject">Item Name</div>
+        <div class="cbm">CBM</div>
+        <div class="weight">Weight</div>
+    </div>
+    <div class="email-list" style="height: 500px; overflow-y: scroll;">
+        @foreach (var item in Model)
+        {
+            <div class="email">
+                <div class="sender">
+                    <a href="@Url.Action("", "", new { id = item.item_id })">Edit</a> |
+                    <a href="@Url.Action("ItemDetail", "Item", new { itemCode = @item.item_code })">View</a>
+
+                </div>
+                <div class="sender">@item.Category.Name</div>
+                <div class="sender">@item.item_id</div>
+                <div class="subject">
+                    @item.item_code - @item.name
+                </div>
+                <div class="cbm">@item.cbm</div>
+                <div class="weight">@item.weight</div>
+            </div>
+        }
+    </div>
+</div>
+
+@if (Model.Count == 0)
+{
+    <h3 class="text-center">No Records Found</h3>
+}
+else
+{
+    <h3 class="text-center">
+        Total items: @Model.Count.ToString("#,##0")
+    </h3>
+}

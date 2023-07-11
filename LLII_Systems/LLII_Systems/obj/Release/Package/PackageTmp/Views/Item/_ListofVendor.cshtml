@@ -1,0 +1,23 @@
+﻿@model LLII_Systems.Models.ItemDetailViewModel
+
+
+<table class="table table-bordered table-striped table-responsive">
+    <thead>
+        <tr class="table-dark">
+            <th>Vendor Code</th>
+            <th>Company Name</th>
+            <th>Actions</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vendor in Model.VendorList)
+        {
+            <tr style="height:40px;">
+                <td><a href="@Url.Action("", "", new { vendorId = @vendor.Id , itemId = @Model.ItemDetail.id })">@vendor.Id </a></td>
+                <td>@vendor.Name</td>
+                <td><a href="@Url.Action("vendoritem", "item", new { vendorId = @vendor.Id , itemId = @Model.ItemDetail.id , itemCode = Model.ItemDetail.item_code})" class="btn btn-success">Add</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

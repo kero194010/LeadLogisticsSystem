@@ -1,0 +1,61 @@
+﻿@model orderdetailsViewModel
+@using LLII_Systems.Models
+@{
+    ViewBag.Title = "Order Logs";
+    DateTime today = DateTime.Today;
+    DateTime defaultStartDate = today.AddDays(-7).Date;
+}
+
+<h2>Order Logs</h2>
+
+<div class="container">
+    @using (Html.BeginForm("OrderLogs", "Order", FormMethod.Get))
+    {
+        <div class="form-group filter-date">
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.Label("Start Date:", new { @class = "control-label" })
+                    @Html.TextBox("startDate", Request.QueryString["startDate"] ?? defaultStartDate.ToString("yyyy-MM-dd"), new { @class = "form-control", @type = "date" })
+                </div>
+                <div class="col-md-4">
+                    @Html.Label("End Date:", new { @class = "control-label" })
+                    @Html.TextBox("endDate", Request.QueryString["endDate"] ?? today.ToString("yyyy-MM-dd"), new { @class = "form-control", @type = "date" })
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group" style="margin-top: 25px;">
+                        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-filter"></i> Filter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="div-border">
+            @if (Model.OrderLog.Count > 0)
+            {
+                <table class="table table-bordered table-striped table-responsive">
+                    <thead>
+                        <tr class="table-dark">
+                            @*<th>Order ID</th>*@
+                            <th>Log Description</th>
+                            <th>Log Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var log in Model.OrderLog)
+                        {
+                            <tr>
+                                @*<td>@log.OrderID</td>*@
+                                <td>@log.LogMessage</td>
+                                <td>@log.LogDate.ToString("MMMM dd, yyyy")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p style="text-align:center; color:red;">No order logs found.</p>
+            }
+        </div>
+    }
+</div>

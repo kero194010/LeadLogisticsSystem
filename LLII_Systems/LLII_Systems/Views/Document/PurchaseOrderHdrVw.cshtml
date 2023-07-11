@@ -1,0 +1,39 @@
+﻿@model List<PurchaseOrdercs>
+@using LLII_Systems.Models
+@{
+    ViewBag.Title = "Purchase Order";
+}
+
+<h2>Purchase Orders</h2>
+
+@if (Model.Count == 0)
+{
+    <p>No purchase orders found.</p>
+}
+else
+{
+    <table class="table table-bordered table-striped table-responsive">
+        <thead>
+            <tr class="table-dark">
+                <th>Purchase Order Number</th>
+                <th>Purchase Order Date</th>
+                <th>Store Name</th>
+                <th>Vendor Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var purchaseOrder in Model)
+            {
+                <tr>
+                    <td>@purchaseOrder.PurchaseOrderNumber</td>
+                    <td>@purchaseOrder.PurchaseOrderDate.ToString("MMMM dd,yyyy")</td>
+                    <td>@purchaseOrder.StoreName</td>
+                    <td>@purchaseOrder.VendorName</td>
+                    <td><a href="@Url.Action("Details", "Document", new { id = purchaseOrder.PurchaseOrderNumber })">View Details</a></td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}

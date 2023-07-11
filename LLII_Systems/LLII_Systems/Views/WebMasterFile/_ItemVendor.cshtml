@@ -1,0 +1,32 @@
+﻿@model LLII_Systems.Models.ItemDetailViewModel
+
+<div class="vendor-list">
+    @foreach (var vendor in Model.ItemVendors)
+    {
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="https://static.vecteezy.com/system/resources/previews/020/190/610/large_2x/mcdonalds-logo-mcdonald-icon-free-free-vector.jpg" alt="@vendor.Name" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">@vendor.Name @vendor.Id</h5>
+                        <p class="card-text"></p>
+                        <div class="button-group">
+                            <button type="button" class="btn btn-primary">
+                                View Details
+                            </button>
+                            @*<button type="button" class="btn btn-success">
+                                Add Vendor
+                            </button>*@
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    }
+</div>
+

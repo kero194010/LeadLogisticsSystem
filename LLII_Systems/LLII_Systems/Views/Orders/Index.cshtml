@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Transactions";
+}
+
+<h2>Web Transactions</h2>
+<div class="item-detail-container">
+    @*<h2>Item Detail</h2>*@
+
+    <div class="primary-info">
+        <h4 class="info-header">Macromatics</h4>
+
+        <div class="row">
+            <div class="col">
+                <a href="@Url.Action("PurchaseOrderHdr","Orders")" class="btn btn-primary btn-lg btn-wrap">Purchase Order List</a>
+                <a href="@Url.Action("ViewXMLFiles","Document")" class="btn btn-primary btn-lg btn-wrap">Upload PO (xml)</a>
+
+            </div>
+            <div class="col">
+                <a href="@Url.Action("OrderLogs","Orders")" class="btn btn-primary btn-lg btn-wrap">Purchase Order Logs</a>
+            </div>
+            <div class="col">
+              
+            </div>
+        </div>
+
+    </div>
+
+    <div class="secondary-info">
+        <h4 class="info-header">Oracle Netsuites</h4>
+        <div class="row">
+            <div class="col">
+                <a href="@Url.Action("SalesOrderHdr","Orders")" class="btn btn-primary btn-lg btn-wrap">Sales Order List</a>
+                <a href="#" class="btn btn-primary btn-lg btn-wrap">Upload SO (xml)</a>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+              
+            </div>
+        </div>
+    </div>
+</div>

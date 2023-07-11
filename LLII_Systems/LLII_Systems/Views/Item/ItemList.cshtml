@@ -1,0 +1,71 @@
+﻿@model LLII_Systems.Models.PaginationViewModel
+
+@using LLII_Systems.Models
+@{
+    ViewBag.Title = "Item List";
+
+}
+
+<h2>Item list</h2>
+
+
+<div class="div-border">
+    <table class="table table-bordered table-striped table-responsive" id="myTable">
+        <thead>
+            <tr class="table-dark">
+                <th>Item Code</th>
+                <th>Name</th>
+                <th>Item Source</th>
+                <th>Category</th>
+                <th>Sub Category</th>
+                <th>Perishable</th>
+                <th>Vat Indicator</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td><a href="@Url.Action("detail", "item", new { itemId = item.id, itemCode = item.item_code })">@item.item_code</a></td>
+                    <td>@item.item_desc</td>
+                    <td>@item.item_source</td>
+                    <td>@item.item_cat.Name</td>
+                    <td>@item.item_sub_cat.Name</td>
+                    <td>@(item.perishable ? "Yes" : "No")</td>
+                    <td>@(item.vat_indicator ? "Yes" : "No")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="pagination justify-content-center">
+    @if (Model.TotalPages > 1)
+    {
+        if (Model.Page > 1)
+        {
+            <a class="page-link" href="@Url.Action("ItemList", new { page = Model.Page - 1 })">Previous</a>
+        }
+
+        <ul class="pagination">
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.Page ? "active" : "")">
+                    @if (i == Model.Page)
+                    {
+                        <span class="page-link">@i</span>
+                    }
+                    else
+                    {
+                        <a class="page-link" href="@Url.Action("ItemList", new { page = i })">@i</a>
+                    }
+                </li>
+            }
+        </ul>
+
+        if (Model.Page < Model.TotalPages)
+        {
+            <a class="page-link" href="@Url.Action("ItemList", new { page = Model.Page + 1 })">Next</a>
+        }
+    }
+</div>

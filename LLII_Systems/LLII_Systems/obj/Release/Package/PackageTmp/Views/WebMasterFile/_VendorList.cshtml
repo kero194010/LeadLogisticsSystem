@@ -1,0 +1,85 @@
+﻿@model LLII_Systems.Models.ItemDetailViewModel
+
+<div class="vendor-list">
+    @foreach (var vendor in Model.ItemVendors)
+    {
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="https://static.vecteezy.com/system/resources/previews/020/190/610/large_2x/mcdonalds-logo-mcdonald-icon-free-free-vector.jpg" alt="@vendor.Name" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">@vendor.Name @vendor.Id</h5>
+                        <p class="card-text"></p>
+                        <div class="button-group">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#vendorModal_@vendor.Id">
+                                View Details
+                            </button>
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmModal_@vendor.Id">
+                                Add Vendor
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for viewing vendor details -->
+        <div class="modal fade" id="vendorModal_@vendor.Id" tabindex="-1" aria-labelledby="vendorModalLabel_@vendor.Id" aria-hidden="true">
+            <!-- Modal content -->
+        </div>
+
+        <!-- Confirmation Modal for adding vendor -->
+        <div class="modal fade" id="confirmModal_@vendor.Id" tabindex="-1" aria-labelledby="confirmModalLabel_@vendor.Id" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel_@vendor.Id">Add Vendor</h5>
+                        <button type="button" class="btn-close" onclick="test('@vendor.Id')" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Do you want to add the vendor with ID @vendor.Id?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="test('@vendor.Id')" data-bs-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-primary" onclick="addVendor('@vendor.Id')" data-bs-dismiss="modal">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    }
+</div>
+    
+<script>
+    function test(vendorId) {
+        //alert('pasok')
+        $('#myModals').modal('hide');
+        $('#confirmModal_' + vendorId).modal('hide');
+    }
+    function addVendor(vendorId) {
+        // Close the current modal (confirmation modal)
+        $('#myModals').modal('hide');
+        $('#confirmModal_' + vendorId).modal('hide');
+
+        // Perform any additional actions needed
+
+    }
+    //function addVendor(vendorId) {
+    //    // Invoke your method here with the vendorId
+    //    // Example: You can make an AJAX request to the server to add the vendor
+    //    // $.ajax({
+    //    //     url: '/your-controller/addVendor',
+    //    //     type: 'POST',
+    //    //     data: { vendorId: vendorId },
+    //    //     success: function (response) {
+    //    //         // Handle the response as needed
+    //    //     },
+    //    //     error: function (error) {
+    //    //         // Handle the error as needed
+    //    //     }
+    //    // });
+    //}
+</script>

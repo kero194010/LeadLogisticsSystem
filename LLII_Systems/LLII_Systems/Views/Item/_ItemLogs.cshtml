@@ -1,0 +1,36 @@
+﻿@model LLII_Systems.Models.ItemDetailViewModel
+
+<div class="container">
+    <table class="table table-bordered table-striped table-responsive">
+        <thead>
+            <tr class="table-dark">
+                <th>Log Date</th>
+                <th>Log Description</th>
+                <th>Action</th>
+                <th>User</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ItemLogs)
+            {
+                <tr>
+
+                    <td>@item.Date</td>
+                    <td>@item.Description</td>
+                    <td>@item.Action</td>
+                    <td>
+                        <a href="@Url.Action("","")" class="center-block text-center user-avatar"><img src="~/Content/Photo/1.jpg" title="@item.User.FirstName  @item.User.LastName" /></a>
+
+
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (Model.ItemLogs.Count == 0)
+    {
+
+        <p style="text-align:center; color:red;">No logs found.</p>
+    }
+</div>

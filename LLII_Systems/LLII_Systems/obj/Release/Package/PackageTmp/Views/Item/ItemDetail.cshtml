@@ -1,0 +1,177 @@
+﻿@model LLII_Systems.Models.ItemDetailViewModel
+@{
+    ViewBag.Title = "Item Detail";
+
+}
+
+<style>
+    .table.table-bordered {
+        font-size: 15px; /* Adjust the font size as needed */
+    }
+
+        .table.table-bordered td,
+        .table.table-bordered th {
+            padding: 1rem; /* Adjust the padding as needed */
+        }
+
+    .table.table-striped tbody tr {
+        height: 50px; /* Adjust the row height as needed */
+    }
+    .item-card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        margin: auto;
+        text-align: center;
+        font-family: arial;
+    }
+    
+</style>
+
+<div class="py-1">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+
+            @using (Html.BeginForm("save", "item", FormMethod.Post, new { @onsubmit="showModal()",itemCode = Model.ItemDetail.item_code }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-container-udf">
+
+                    <a href="javascript:history.back()" class="btn btn-primary back-button pull-left">Go Back</a>
+                    <button id="updateButton" type="button" class="btn btn-primary">Edit</button>
+                    <button id="myBtn" type="submit" class="btn btn-success enableButton" disabled>Save</button>
+
+                    @if (Model.ItemDetail.activated == false)
+                    {
+                        <span class="badge rounded-pill bg-success pull-right">ACTIVE</span>
+                    }
+                    else
+                    {
+                        <span class="badge rounded-pill bg-danger pull-right">Pending</span>
+                    }
+
+                    <h4 class="text-center mb-4">Item Record</h4>
+
+                    <ul class="nav nav-pills" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#primaryRecord" aria-selected="true" role="tab">Primary Information</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" href="#inventory" aria-selected="false" tabindex="-1" role="tab">Inventory Specification</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" href="#vendors" aria-selected="false" tabindex="-1" role="tab">Vendor</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" href="#accounting" aria-selected="false" tabindex="-1" role="tab">Accounting</a>
+                        </li>
+                        <li class="nav-item d-none" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" href="#itemLogs" aria-selected="false" tabindex="-1" role="tab">Item Logs</a>
+                        </li>
+                    </ul>
+
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade show active" id="primaryRecord" role="tabpanel">
+                            <hr class="mb-4" />
+                            @Html.Partial("_ItemPrimaryDetail")
+                        </div>
+                        <div class="tab-pane fade" id="inventory" role="tabpanel">
+                            <hr class="mb-4" />
+                            @Html.Partial("_ItemInventoryDetail")
+                        </div>
+                        <div class="tab-pane fade" id="vendors" role="tabpanel">
+                            <hr class="mb-4" />
+                            <a class="btn btn-success" id="addVendorBtn">Add Vendor</a>
+                            <div id="vendorListContainer">
+                                @Html.Partial("_ItemVendor")
+                            </div>
+
+                            @if (Model.ItemVendors.Count == 0)
+                            {
+
+                                <p style="text-align:center; color:red;">No vendors found.</p>
+                            }
+                        </div>
+                        <div class="tab-pane fade" id="accounting" role="tabpanel">
+                            <hr class="mb-4" />
+                            <div class="mb-1">
+                                @Html.Partial("_ItemAcctgDetail")
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="itemLogs" role="tabpanel">
+                            <hr class="mb-4" />
+                            @Html.Partial("_ItemLogs")
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+<div id="confirmationModal" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Save Changes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to save the changes?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="confirmSaveButton" type="submit" class="btn btn-success">Save</button>
+                <button id="myCancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div id="vendorModal" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">List of Vendors</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("_ListofVendor")
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function convertTemperature(sourceUnit) {
+        var celsiusInput = document.getElementById("celsiusInput");
+        var fahrenheitInput = document.getElementById("fahrenheitInput");
+        var kelvinInput = document.getElementById("kelvinInput");
+
+        var temperature;
+        if (sourceUnit === "celsius") {
+            temperature = parseFloat(celsiusInput.value);
+
+            fahrenheitInput.value = (temperature * 9 / 5) + 32;
+            kelvinInput.value = temperature + 273.15;
+        } else if (sourceUnit === "fahrenheit") {
+            temperature = parseFloat(fahrenheitInput.value);
+
+            celsiusInput.value = (temperature - 32) * 5 / 9;
+            kelvinInput.value = (temperature - 32) * 5 / 9 + 273.15;
+        } else if (sourceUnit === "kelvin") {
+            temperature = parseFloat(kelvinInput.value);
+
+            celsiusInput.value = temperature - 273.15;
+            fahrenheitInput.value = (temperature - 273.15) * 9 / 5 + 32;
+        }
+    }
+</script>

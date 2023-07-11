@@ -1,0 +1,173 @@
+﻿@model LLII_Systems.Models.Store
+@{
+    ViewBag.Title = "Store Detail";
+}
+
+
+@*<a href="javascript:history.back()" class="back-button pull-left">Go Back</a>*@
+
+
+<style>
+    .form-container-udf {
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 5px;
+        background-color: #fff;
+    }
+
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-top: 5px;
+    }
+
+    .btn-success {
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+</style>
+
+<div class="py-1">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            @using (Html.BeginForm("", "", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-container-udf">
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-success" disabled>Update record</button>
+                    </div>
+                    <h4 class="text-center mb-4">Store Record</h4>
+                    <h4>Primary Information</h4>
+                    <hr />
+                    <div class="mb-1">
+                        <div class="form-group row">
+                            <div class="col">
+                                @Html.LabelFor(model => model.StoreNumber, "Store Number:", new { @class = "form-label" })
+                                @Html.EditorFor(model => model.StoreNumber, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                @Html.ValidationMessageFor(model => model.StoreNumber, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col">
+                                @Html.LabelFor(model => model.CompanyName, "Company Name", new { @class = "form-label" })
+                                @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col">
+                                @Html.LabelFor(model => model.OwnerName, "Owner Name", new { @class = "form-label" })
+                                @Html.EditorFor(model => model.OwnerName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                @Html.ValidationMessageFor(model => model.OwnerName, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="mb-1">
+                        <div class="form-group row">
+
+                            <div class="col">
+                                @Html.LabelFor(model => model.StoreName, "Store Name", new { @class = "form-label" })
+                                @Html.EditorFor(model => model.StoreName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                @Html.ValidationMessageFor(model => model.StoreName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col">
+                                @Html.LabelFor(model => model.StoreOperatingHours, "Store Business hours", new { @class = "form-label" })
+                                @Html.EditorFor(model => model.StoreOperatingHours, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                @Html.ValidationMessageFor(model => model.StoreOperatingHours, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col">
+                                @Html.LabelFor(model => model.StoreOwnership, "Store Ownership", new { @class = "form-label" })
+                                @Html.EditorFor(model => model.StoreOwnership, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                @Html.ValidationMessageFor(model => model.StoreOwnership, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="form-group row">
+
+                                <div class="col">
+                                    @Html.LabelFor(model => model.TinNo, "Tin Number:", new { @class = "form-label" })
+                                    @Html.EditorFor(model => model.TinNo, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                    @Html.ValidationMessageFor(model => model.TinNo, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+
+                                </div>
+                                <div class="col">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <h4 class="mb-1">Secondary Information</h4>
+                        <hr />
+                        <div class="mb-3">
+                            <div class="form-group row">
+                                <div class="col">
+                                    @Html.LabelFor(model => model.StoreManager, "Store Manager", new { @class = "form-label" })
+                                    @Html.EditorFor(model => model.StoreManager, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                    @Html.ValidationMessageFor(model => model.StoreManager, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+                                    @Html.LabelFor(model => model.OrderingManager, "Ordering Manager", new { @class = "form-label" })
+                                    @Html.EditorFor(model => model.OrderingManager, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                    @Html.ValidationMessageFor(model => model.OrderingManager, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+                                    @Html.LabelFor(model => model.ContactNumber, "Contact No.", new { @class = "form-label" })
+                                    @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                    @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-group row">
+                                <div class="col">
+                                    @Html.LabelFor(model => model.Address, "Address", new { @class = "form-label" })
+                                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+                                    @Html.LabelFor(model => model.Email, "Email Address", new { @class = "form-label" })
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-group row">
+                                <div class="col">
+                                    @Html.LabelFor(model => model.City, "City", new { @class = "form-label" })
+                                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+                                    @Html.LabelFor(model => model.State, "State", new { @class = "form-label" })
+                                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+                                    @Html.LabelFor(model => model.Country, "Country", new { @class = "form-label" })
+                                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col">
+                                    @Html.LabelFor(model => model.PostalCode, "Postal Code", new { @class = "form-label" })
+                                    @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                    @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

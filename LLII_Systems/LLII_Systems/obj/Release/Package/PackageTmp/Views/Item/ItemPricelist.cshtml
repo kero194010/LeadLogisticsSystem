@@ -1,0 +1,70 @@
+﻿@model LLII_Systems.Models.PaginationViewModel
+
+@using LLII_Systems.Models
+@{
+    ViewBag.Title = "Price list";
+
+}
+
+<h2>Item Pricelist</h2>
+
+
+
+<div class="div-border">
+    <table class="table table-bordered table-striped table-responsive" id="myTable">
+        <thead>
+            <tr class="table-dark">
+                <th>Item Code</th>
+                <th>Item Description</th>
+                <th>Standard Price</th>
+                <th>Vat</th>
+                <th>Effective Date</th>
+                @*<th>Actions</th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.item_code</td>
+                    <td>@item.item_desc</td>
+                    <td>@item.unit_price</td>
+                    <td>Vatable Inc</td>
+                    <td>@item.effective_date.ToString("MMMM dd,yyyy hh:mmtt")</td>
+                    @*<td><a href="#">Update</a></td>*@
+                </tr>
+            }
+    </table>
+</div>
+
+
+<div class="pagination justify-content-center">
+    @if (Model.TotalPages > 1)
+    {
+        if (Model.Page > 1)
+        {
+            <a class="page-link" href="@Url.Action("Pricelist", new { page = Model.Page - 1 })">Previous</a>
+        }
+
+        <ul class="pagination">
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.Page ? "active" : "")">
+                    @if (i == Model.Page)
+                    {
+                        <span class="page-link">@i</span>
+                    }
+                    else
+                    {
+                        <a class="page-link" href="@Url.Action("Pricelist", new { page = i })">@i</a>
+                    }
+                </li>
+            }
+        </ul>
+
+        if (Model.Page < Model.TotalPages)
+        {
+            <a class="page-link" href="@Url.Action("ItemList", new { page = Model.Page + 1 })">Next</a>
+        }
+    }
+</div>

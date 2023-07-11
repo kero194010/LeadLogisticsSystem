@@ -1,0 +1,255 @@
+﻿@model LLII_Systems.Models.VendorDetailViewModel
+@{
+    ViewBag.Title = "Vendor Detail";
+}
+
+
+@*<a href="javascript:history.back()" class="back-button pull-left">Go Back</a>*@
+
+
+<style>
+    .form-container-udf {
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 5px;
+        background-color: #fff;
+    }
+
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-top: 5px;
+    }
+
+    .btn-success {
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+</style>
+
+<div class="py-1">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            @using (Html.BeginForm("", "", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-container-udf">
+
+                    <a href="javascript:history.back()" class="btn btn-primary back-button pull-left">Go Back</a>
+                    <button id="updateButton" type="button" class="btn btn-primary">Edit</button>
+                    <button id="myBtn" type="submit" class="btn btn-success enableButton" disabled>Save</button>
+
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-success">Update record</button>
+                    </div>
+                    <h4 class="text-center mb-4">Vendor Record</h4>
+                    <ul class="nav nav-pills" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#primary" aria-selected="true" role="tab">Primary Information</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" href="#contact" aria-selected="false" tabindex="-1" role="tab">Contact Details</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" data-bs-toggle="tab" href="#acctg" aria-selected="false" tabindex="-1" role="tab">Accounting</a>
+                        </li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade show active" id="primary" role="tabpanel">
+
+                            <hr class="mb-4" />
+                            @*<span class="badge rounded-pill bg-danger">Pending</span>*@
+                            <div class="mb-3">
+                                <div class="form-group row">
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.VendorDetail.vendor_code, "Vendor Code", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.VendorDetail.vendor_code, new { htmlAttributes = new { @class = "form-control ", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.VendorDetail.vendor_code, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.VendorDetail.Name, "Vendor Name", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.VendorDetail.Name, new { htmlAttributes = new { @class = "form-control enableButton", disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.VendorDetail.Name, "", new { @class = "text-danger" })
+
+                                    </div>
+                                    <div class="col">
+                                        @*@Html.LabelFor(model => model.Id, "Vendor ID", new { @class = "form-label" })*@
+                                        @Html.EditorFor(model => model.VendorDetail.Id, new { htmlAttributes = new { @class = "form-control d-none", disabled = "disabled" ,id="vendorId" } })
+                                        @*@Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })*@
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.VendorDetail.TinNumber, "Tin Number", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.VendorDetail.TinNumber, new { htmlAttributes = new { @class = "form-control enableButton", disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.VendorDetail.TinNumber, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.VendorDetail.owner_type, "Owner Type", new { @class = "form-label" })
+                                        @Html.DropDownListFor(m => m.VendorDetail.owner_type, new SelectList(new[]
+                        {
+                            new SelectListItem { Text = "Owned", Value = "Owned" },
+                            new SelectListItem { Text = "Franchise", Value = "Franchise" }
+                        }, "Value", "Text"), "Select Ownership", new { @class = "form-control enableButton", disabled = "disabled" })
+                                        @Html.ValidationMessageFor(model => model.VendorDetail.owner_type, "", new { @class = "text-danger" })
+
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.VendorDetail.primary_subsidiary, "Primary Subsidiary", new { @class = "form-label" })
+                                        @Html.DropDownListFor(m => m.VendorDetail.primary_subsidiary, new SelectList(new[]
+                     {
+                         new SelectListItem { Text = "Lead Logistics Innovation Inc.", Value = "LLII" },
+                         new SelectListItem { Text = "Golden Arches Development Corporation", Value = "GADC" }
+                     }, "Value", "Text"), "Select Subsidiary", new { @class = "form-control enableButton", disabled = "disabled" })
+
+                                        @Html.ValidationMessageFor(model => model.VendorDetail.primary_subsidiary, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+                                    </div>
+                                    <div class="col">
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <h4 class="mb-3">Vendor Item Information</h4>
+                            <hr />
+                            <div class="mb-3">
+                                @Html.Partial("_ItemlistVendor")
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel">
+
+                            <hr />
+                            <div class="mb-3">
+                                <div class="form-group row">
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.VendorDetail.ContactPerson, "Contact Person", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.VendorDetail.ContactPerson, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.VendorDetail.ContactPerson, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.VendorDetail.ContactNumber, "Contact No.", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.VendorDetail.ContactNumber, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.VendorDetail.ContactNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-group row">
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.VendorDetail.Address, "Address", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.VendorDetail.Address, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.VendorDetail.Address, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.VendorDetail.Email, "Email Address", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.VendorDetail.Email, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.VendorDetail.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-group row">
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.VendorDetail.City, "City", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.VendorDetail.City, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.VendorDetail.City, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.VendorDetail.State, "State", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.VendorDetail.State, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.VendorDetail.State, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.VendorDetail.Country, "Country", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.VendorDetail.Country, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.VendorDetail.Country, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.VendorDetail.PostalCode, "Postal Code", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.VendorDetail.PostalCode, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                        @Html.ValidationMessageFor(model => model.VendorDetail.PostalCode, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.VendorDetail.Region, "Region", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.VendorDetail.Region, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                                        @*@Html.DropDownListFor(m => m.VendorDetail.primary_subsidiary, new SelectList(new[]
+                                            {
+                                                new SelectListItem { Text = "Lead Logistics Innovation Inc.", Value = "LLII" },
+                                                new SelectListItem { Text = "Golden Arches Development Corporation", Value = "GADC" }
+                                            }, "Value", "Text"), "Select Subsidiary", new { @class = "form-control enableButton", disabled = "disabled" })*@
+                                        @Html.ValidationMessageFor(model => model.VendorDetail.Region, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="acctg" role="tabpanel">
+
+                            <hr />
+                            <div class="mb-3">
+                                <div class="form-group row">
+                                    <div class="col">
+                                    </div>
+                                    <div class="col">
+
+                                    </div>
+                                    <div class="col">
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="updatePrice" tabindex="-1" aria-labelledby="updatePriceLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title" id="updatePriceLabel">Update Price</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="itemCodeInput">
+                <input type="hidden" id="itemId">
+                <input type="hidden" id="vendorId">
+                <p>Item Description: <span id="itemDescSpan"></span></p>
+                <div class="mb-3">
+                    <label for="newPriceInput" class="form-label">New Price</label>
+                    <input type="number" class="form-control" id="newPriceInput" min="0" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="updatePrice()">Update</button>
+            </div>
+        </div>
+    </div>
+</div>

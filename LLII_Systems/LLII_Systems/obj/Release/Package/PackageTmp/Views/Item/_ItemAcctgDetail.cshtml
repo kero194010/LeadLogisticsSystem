@@ -1,0 +1,25 @@
+﻿@model LLII_Systems.Models.ItemDetailViewModel
+<div class="form-group row">
+    <div class="col">
+        @Html.LabelFor(model => model.ItemDetail.acct_code, "Account Code", new { @class = "form-label" })
+        @Html.EditorFor(model => model.ItemDetail.acct_code, new { htmlAttributes = new { @class = "form-control enableButton", disabled = "disabled" } })
+        @Html.ValidationMessageFor(model => model.ItemDetail.acct_code, "", new { @class = "text-danger" })
+    </div>
+    <div class="col">
+        @Html.LabelFor(model => model.ItemDetail.sub_acct_code, "Sub-Account Code", new { @class = "form-label" })
+        @Html.EditorFor(model => model.ItemDetail.sub_acct_code, new { htmlAttributes = new { @class = "form-control enableButton", disabled = "disabled" } })
+        @Html.ValidationMessageFor(model => model.ItemDetail.sub_acct_code, "", new { @class = "text-danger" })
+
+    </div>
+    <div class="col">
+        @Html.LabelFor(model => model.ItemDetail.primary_subsidiary, "Primary Subsidiary", new { @class = "form-label" })
+        @Html.EditorFor(model => model.ItemDetail.primary_subsidiary, new { htmlAttributes = new { @class = "form-control enableButton", disabled = "disabled" } })
+        @Html.ValidationMessageFor(model => model.ItemDetail.primary_subsidiary, "", new { @class = "text-danger" })
+    </div>
+    <div class="col">
+        @Html.LabelFor(model => model.ItemDetail.sap_subsidiary, "SAP Subsidiary", new { @class = "form-label" })
+        @Html.EditorFor(model => model.ItemDetail.sap_subsidiary, new { htmlAttributes = new { @class = "form-control enableButton", disabled = "disabled" } })
+        @Html.ValidationMessageFor(model => model.ItemDetail.sap_subsidiary, "", new { @class = "text-danger" })
+    </div>
+
+</div>

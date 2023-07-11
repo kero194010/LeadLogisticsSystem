@@ -1,0 +1,74 @@
+﻿@model List<string>
+@using System.Xml.Linq
+@using System.Globalization
+
+@{
+    ViewBag.Title = "XML Files (raw)";
+}
+
+<h2>List of XML Files</h2>
+@using (Html.BeginForm("UploadFile", "Document", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <input type="file" name="files" multiple />
+    <button type="submit">Upload</button>
+
+}
+
+
+
+    @*if (Model.Count == 0)
+    {
+<p>No XML files found in the folder.</p>
+    }
+    else
+    {
+        {
+            // Sort the XML files based on purchase order date
+            var sortedFiles = Model
+                .Select(file => new FileInfo(file))
+                .OrderByDescending(fileInfo =>
+                {
+                    // Load XML data from file or any other source
+                    string xmlData = System.IO.File.ReadAllText(fileInfo.FullName);
+                    // Parse XML to get the purchase order date
+                    XDocument xmlDoc = XDocument.Parse(xmlData);
+                    DateTime purchaseOrderDate = DateTime.ParseExact(
+                        xmlDoc.Element("PurchaseOrder")?.Element("PurchaseOrderDate")?.Value,
+                        "yyyy-MM-dd",
+                        CultureInfo.InvariantCulture
+                    );
+                    return purchaseOrderDate;
+                });
+        }
+<table class="table">
+    <thead>
+        <tr>
+            <th>File Name</th>
+            <th>File Size</th>
+            <th>Last Modified</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var file in Model)
+        {
+            var fileInfo = new FileInfo(file);
+            <tr>
+                <td>
+                    <a href="@Url.Action("OpenXmlFile", "Document", new { filePath = file })" target="_blank">
+                            @fileInfo.Name
+                        </a>
+                    <a href="@Url.Action("ConvertXmlToHtml", "Document", new { filePath = file })" target="_blank">
+                        @fileInfo.Name
+                    </a>
+                </td>
+                <td>@fileInfo.Length</td>
+                <td>@fileInfo.LastWriteTime.ToString("MM/dd/yy")</td>
+                <td><a href="#">Upload</a> | <a href="@Url.Action("DownloadXmlFile", "Document", new { filePath = file })" download>Download</a> | <a href="#">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+    }*@

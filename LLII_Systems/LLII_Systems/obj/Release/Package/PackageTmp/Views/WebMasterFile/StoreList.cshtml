@@ -1,0 +1,47 @@
+﻿@model List<LLII_Systems.Models.Store>
+
+@using LLII_Systems.Models
+@{
+    ViewBag.Title = "Store list";
+    DateTime today = DateTime.Today;
+    DateTime defaultStartDate = today.AddDays(-7).Date;
+}
+
+<h2>Item list</h2>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">New Store</a></li>
+
+</ol>
+
+@using (Html.BeginForm("", "", FormMethod.Get))
+{
+
+    <div class="div-border">
+        <table class="table table-bordered table-striped table-responsive">
+            <thead>
+                <tr class="table-dark">
+                    <th>Store Code</th>
+                    <th>Store Name</th>
+                    <th>Company Name</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var store in Model)
+                {
+                    <tr>
+                        <td><a href="@Url.Action("StoreDetail", "WebMasterFile", new { storeId = store.Id })">@store.StoreNumber</a></td>
+                        <td>@store.StoreName</td>
+                        <td>@store.CompanyName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    if (Model.Count == 0)
+    {
+        <p style="text-align:center; color:red;">No vendor found.</p>
+    }
+}
+

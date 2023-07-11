@@ -1,0 +1,137 @@
+﻿@model PurchaseOrderDetailsViewModel
+@using LLII_Systems.Models
+@using System.Web.Mvc.Html
+@{
+    ViewBag.Title = "Purchase Order Details";
+}
+
+
+<h3>Purchase Order Header</h3>
+<table class="table table-bordered table-responsive table-striped">
+    <thead>
+        <tr class="table-dark">
+            <th>Purchase Order Number</th>
+            <th>Purchase Order Date</th>
+            <th>Store Name</th>
+            <th>Vendor Name</th>
+            <th>Amount</th>
+            <th>Other References</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.PurchaseOrderHdr.PurchaseOrderNumber</td>
+            <td>@Model.PurchaseOrderHdr.PurchaseOrderDate.ToString("MMMM dd,yyyy")</td>
+            <td>@Model.PurchaseOrderHdr.StoreName</td>
+            <td>@Model.PurchaseOrderHdr.VendorName</td>
+            <td>PHP @Model.PurchaseOrderHdr.InvoiceAmount.ToString("N2")</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Purchase Order Details</h3>
+<table class="table table-bordered table-responsive table-striped">
+    <thead>
+        <tr class="table-dark">
+            <th>Item Code</th>
+            <th>Item Name</th>
+            <th>Qty</th>
+            <th>UOM</th>
+            <th>Unit Price</th>
+            <th>Total Unit Price</th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        @foreach (var purchaseOrderDtl in Model.PurchaseOrderLineItems)
+        {
+            <tr>
+                <td><a href="@Url.Action("ItemDetail", "Item", new { itemCode = @purchaseOrderDtl.ItemCode })">@purchaseOrderDtl.ItemCode</a></td>
+
+                <td>@purchaseOrderDtl.Item_name</td>
+                <td>@purchaseOrderDtl.OrderQuantity</td>
+                <td>@purchaseOrderDtl.PurchaseUnit</td>
+                <td>PHP @purchaseOrderDtl.PurchaseUnitPrice.ToString("N2")</td>
+                <td>PHP @purchaseOrderDtl.Total_unit_price.ToString("N2")</td>
+            </tr>
+        }
+        @foreach (var purchaseOrderDtl in Model.PurchaseOrderLineItems)
+        {
+            <tr>
+                <td><a href="@Url.Action("ItemDetail", "Item", new { itemCode = @purchaseOrderDtl.ItemCode })">@purchaseOrderDtl.ItemCode</a></td>
+                <td>@purchaseOrderDtl.Item_name</td>
+                <td>@purchaseOrderDtl.OrderQuantity</td>
+                <td>@purchaseOrderDtl.PurchaseUnit</td>
+                <td>PHP @purchaseOrderDtl.PurchaseUnitPrice.ToString("N2")</td>
+                <td>PHP @purchaseOrderDtl.Total_unit_price.ToString("N2")</td>
+            </tr>
+        }
+
+        @if (ViewBag.TotalPages > 1)
+        {
+            <tr>
+                <td colspan="6">
+                    <nav aria-label="Line Items Pagination">
+                        <ul class="pagination">
+                            @if (ViewBag.CurrentPage > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@Url.Action("Details", "PurchaseOrder", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                            }
+
+                            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                            {
+                                if (i == ViewBag.CurrentPage)
+                                {
+                                    <li class="page-item active"><a class="page-link" href="#">@i</a></li>
+                                }
+                                else
+                                {
+                                    <li class="page-item"><a class="page-link" href="@Url.Action("Details", "PurchaseOrder", new {  page = i })">@i</a></li>
+                                }
+                            }
+
+                            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@Url.Action("Details", "PurchaseOrder", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </td>
+            </tr>
+        }
+        <tr class="table-danger">
+            <td colspan="5">Total Amount</td>
+            <td>PHP @Model.PurchaseOrderHdr.InvoiceAmount.ToString("N2")</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Purchase Order Logs</h3>
+<table class="table table-bordered table-responsive table-striped">
+    <thead>
+        <tr class="table-dark">
+            <th>Log Date</th>
+            <th>Log Message</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var purchaseOrderLog in Model.PurchaseOrderLogs)
+        {
+            <tr>
+                <td>@purchaseOrderLog.LogDate.ToString("MMMM dd,yyyy")</td>
+                <td>@purchaseOrderLog.LogMessage</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

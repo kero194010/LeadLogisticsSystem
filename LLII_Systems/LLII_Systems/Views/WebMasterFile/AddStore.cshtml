@@ -1,0 +1,294 @@
+﻿@model LLII_Systems.Models.Store
+
+@{
+    ViewBag.Title = "New Store";
+}
+
+<style>
+    /* Styles for form containers, labels, and controls */
+    .form-container {
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 5px;
+        background-color: #fff;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-top: 5px;
+    }
+
+    .text-danger {
+        color: #dc3545;
+    }
+
+    .btn-primary {
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+
+
+    /* Center align the previous and next buttons */
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+        align-content: center;
+    }
+
+    #saveButton {
+        display: none;
+    }
+
+    #prevButton {
+        display: none;
+    }
+</style>
+<div class="container d-lg-block d-md-block" style="height:78vh;">
+    @using (Html.BeginForm("InsertStore", "WebMasterFile", FormMethod.Post))
+    {
+        <div class="py-1">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-container" style="height:100%">
+
+                        <h4 class="text-center mb-4">Store Record</h4>
+
+                        <div id="step1" class="form-step">
+                            <h4>Step 1: Primary Information</h4>
+                            <hr />
+                            <div class="mb-3">
+                                <div class="form-group row">
+                                    <div class="col">
+
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.StoreNumber, "Store Number", new { @class = "form-label" })
+                                            @Html.EditorFor(model => model.StoreNumber, new { htmlAttributes = new { @class = "form-control", min = "0" } })
+                                            @*@Html.ValidationMessageFor(model => model.StoreNumber, "", new { @class = "text-danger" })*@
+
+                                    </div>
+                                    <div class="col">
+                                        @*@Html.LabelFor(model => model.item_source, "Source", new { @class = "form-label" })
+                                            @Html.DropDownListFor(m => m.item_source, new SelectList(new[]
+                                                {
+                                                    new SelectListItem { Text = "Local", Value = "local" },
+                                                    new SelectListItem { Text = "Import", Value = "import" }
+                                                }, "Value", "Text"), "Select a source", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.item_source, "", new { @class = "text-danger" })*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-group row">
+                                    <div class="col">
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.StoreName, "Store Name", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.StoreName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.StoreName, "", new { @class = "text-danger" })
+
+                                    </div>
+                                    <div class="col">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="step2" class="form-step">
+                            <h4>Step 2: Secondary Information</h4>
+                            <hr />
+                            <div class="mb-1">
+                                <div class="form-group row">
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.OwnerName, "Owner Name", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.OwnerName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.OwnerName, "", new { @class = "text-danger" })
+
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.ContactNumber, "Contact No.", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.Email, "Email Address", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+
+                                    </div>
+
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.Address, "Address", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+
+                                    </div>
+                                    <div class="col">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="step3" class="form-step">
+                            <h4>Step 3: Additional Information</h4>
+                            <hr />
+                            <div class="mb-4">
+                                <div class="form-group row">
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.City, "City", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.State, "State", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.Country, "Country", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.PostalCode, "Postal Code", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(model => model.TinNo, "Tin no.", new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.TinNo, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.TinNo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="overflow:auto;">
+            <div style="float:left;">
+                <button type="button" id="prevButton" class="btn btn-primary" onclick="previousStep()">Previous</button>
+
+            </div>
+            <div style="float:right;">
+                <button type="button" id="nextButton" class="btn btn-primary" onclick="nextStep()">Next</button>
+                <button type="submit" class="btn btn-primary" id="saveButton" onclick="saveStep()">Save</button>
+            </div>
+
+
+        </div>
+
+
+    }
+</div>
+<script>
+    // Script for managing form steps
+    var currentStep = 1;
+    var formSteps = document.getElementsByClassName("form-step");
+    var prevButton = document.getElementById("prevButton");
+    var nextButton = document.getElementById("nextButton");
+    var saveButton = document.getElementById("saveButton");
+
+    // Hide all form steps except the first one
+    for (var i = 1; i < formSteps.length; i++) {
+        formSteps[i].style.display = "none";
+    }
+
+    // Function to show the next form step
+    function nextStep() {
+        // Validate the current step before proceeding
+        if (validateStep(currentStep)) {
+            formSteps[currentStep - 1].style.display = "none";
+            formSteps[currentStep].style.display = "block";
+            currentStep++;
+
+            // Hide or show previous/next buttons
+            if (currentStep === formSteps.length) {
+                nextButton.style.display = "none";
+                saveButton.style.display = "block";
+            } else {
+                prevButton.style.display = "block";
+                nextButton.style.display = "block";
+                saveButton.style.display = "none";
+            }
+        }
+    }
+    function saveStep() {
+        // Validate the current step before proceeding
+        if (validateStep(currentStep)) {
+            formSteps[currentStep - 1].style.display = "none";
+            formSteps[currentStep].style.display = "block";
+            currentStep++;
+
+        }
+    }
+
+    // Function to show the previous form step
+    function previousStep() {
+        formSteps[currentStep - 1].style.display = "none";
+        formSteps[currentStep - 2].style.display = "block";
+        currentStep--;
+
+        // Hide or show previous/next buttons
+        if (currentStep === 1) {
+            prevButton.style.display = "none";
+        } else {
+            prevButton.style.display = "block";
+        }
+
+        nextButton.style.display = "block";
+        saveButton.style.display = "none";
+    }
+
+    // Function to validate the current step
+    function validateStep(step) {
+        var isValid = true;
+        var currentForm = formSteps[step - 1];
+        var inputFields = currentForm.getElementsByTagName("input");
+        var selectFields = currentForm.getElementsByTagName("select");
+
+        // Validate input fields
+        for (var i = 0; i < inputFields.length; i++) {
+            var inputField = inputFields[i];
+            if (inputField.value.trim() === "") {
+                isValid = false;
+                inputField.classList.add("is-invalid");
+            } else {
+                inputField.classList.remove("is-invalid");
+            }
+        }
+
+        // Validate dropdowns
+        for (var i = 0; i < selectFields.length; i++) {
+            var selectField = selectFields[i];
+            if (selectField.value === "") {
+                isValid = false;
+                selectField.classList.add("is-invalid");
+            } else {
+                selectField.classList.remove("is-invalid");
+            }
+        }
+
+        return isValid;
+    }
+</script>

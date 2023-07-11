@@ -1,0 +1,122 @@
+﻿@model LLII_Systems.Models.ItemDetailViewModel
+<div class="row">
+    <div class="col text-center">
+        <img src="~/Content/Images/pngegg.png" />
+    </div>
+    <div class="col">
+        <div class="mb-3">
+            <div class="form-group row">
+                <div class="col">
+                    @Html.LabelFor(model => model.ItemDetail.item_uom, "Unit of Measurement", new { @class = "form-label" })
+                    @Html.DropDownListFor(m => m.ItemDetail.item_uom, new SelectList(new[]
+                        {
+                            new SelectListItem { Text = "Case", Value = "case" },
+                            new SelectListItem { Text = "Inner", Value = "inner" },
+                            new SelectListItem { Text = "Piece", Value = "piece" }
+                        }, "Value", "Text"), "Select Item UOM", new { @class = "form-control enableButton", disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ItemDetail.item_uom, "", new { @class = "text-danger" })
+                </div>
+                <div class="col">
+                    @Html.LabelFor(model => model.ItemDetail.inner_per_case, "Inner per Case", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.ItemDetail.inner_per_case, new { htmlAttributes = new { @class = "form-control enableButton", disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.ItemDetail.inner_per_case, "", new { @class = "text-danger" })
+                </div>
+                <div class="col">
+                    @Html.LabelFor(model => model.ItemDetail.pieces_per_inner, "Pieces per Inner", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.ItemDetail.pieces_per_inner, new { htmlAttributes = new { @class = "form-control enableButton", disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.ItemDetail.pieces_per_inner, "", new { @class = "text-danger" })
+                </div>
+                <div class="col">
+                    @Html.LabelFor(model => model.ItemDetail.serving_per_case, "Serving per Case", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.ItemDetail.serving_per_case, new { htmlAttributes = new { @class = "form-control enableButton", disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.ItemDetail.serving_per_case, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+        @*<div class="mb-3">
+            <div class="form-group row">
+                <div class="col">
+                    <label class="form-label">Celsius:</label>
+                    <input class="form-control" type="number" id="celsiusInput" oninput="convertTemperature('celsius')">
+                </div>
+                <div class="col">
+                    <label class="form-label">Fahrenheit:</label>
+                    <input class="form-control" type="number" id="fahrenheitInput" oninput="convertTemperature('fahrenheit')">
+                </div>
+                <div class="col">
+                    <label class="form-label">Kelvin:</label>
+                    <input class="form-control" type="number" id="kelvinInput" oninput="convertTemperature('kelvin')">
+                </div>
+                <div class="col">
+                </div>
+            </div>
+        </div>*@
+        <div class="mb-3">
+            <div class="form-group row">
+                <div class="col">
+                    @Html.LabelFor(model => model.ItemDetail.length, "Length", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.ItemDetail.length, new { htmlAttributes = new { @class = "form-control enableButton", disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.ItemDetail.length, "", new { @class = "text-danger" })
+                </div>
+                <div class="col">
+                    @Html.LabelFor(model => model.ItemDetail.width, "Width", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.ItemDetail.width, new { htmlAttributes = new { @class = "form-control enableButton", disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.ItemDetail.width, "", new { @class = "text-danger" })
+                </div>
+                <div class="col">
+                    @Html.LabelFor(model => model.ItemDetail.height, "Height", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.ItemDetail.height, new { htmlAttributes = new { @class = "form-control enableButton", disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.ItemDetail.height, "", new { @class = "text-danger" })
+                </div>
+                <div class="col"></div>
+            </div>
+
+
+        </div>
+        <div class="mb-3">
+            <div class="form-group row">
+                <div class="col">
+                    @Html.LabelFor(model => model.ItemDetail.weight_uom, "Weight UOM", new { @class = "form-label" })
+                    @Html.DropDownListFor(m => m.ItemDetail.weight_uom, new SelectList(new[]
+                        {
+                            new SelectListItem { Text = "Kilograms", Value = "Kg" },
+                            new SelectListItem { Text = "Grams", Value = "g" }
+
+                        }, "Value", "Text"), "Select Item UOM", new { @class = "form-control enableButton", disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.ItemDetail.weight_uom, "", new { @class = "text-danger" })
+                </div>
+                <div class="col">
+                    @Html.LabelFor(model => model.ItemDetail.weight, "Weight", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.ItemDetail.weight, new { htmlAttributes = new { @class = "form-control enableButton", disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.ItemDetail.weight, "", new { @class = "text-danger" })
+                </div>
+                <div class="col">
+                  
+                </div>
+                <div class="col">
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="form-group row">
+                <div class="col">
+                    @Html.LabelFor(model => model.ItemDetail.abc_class, "ABC Classification", new { @class = "form-label" })
+                    @Html.EditorFor(model => model.ItemDetail.abc_class, new { htmlAttributes = new { @class = "form-control enableButton", disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.ItemDetail.abc_class, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col">
+                    <label class="form-label">Split Code</label>
+                    <input class="form-control enableButton" type="text" id="" disabled="disabled">
+                </div>
+                <div class="col">
+
+                </div>
+                <div class="col">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,21 @@
+﻿
+@{ 
+    ViewBag.Title = "FTTP Client Folder";
+}
+<div class="container" style="height:80vh;overflow-y:scroll">
+    <table class="table table-bordered table-responsive table-striped">
+        <tr class="table-dark">
+            <th>File Name</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var fileName in Model)
+        {
+            <tr>
+                <td>@fileName</td>
+                <td>
+                    <a href="@Url.Action("SerializeXml","Document", new { fileName = fileName })">Serialize</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
