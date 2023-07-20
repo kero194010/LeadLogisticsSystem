@@ -43,18 +43,7 @@ namespace LLII_Systems.Models
 
 
     
-    public class Category
-    {
-        [Required(ErrorMessage = "The Category field is required.")]
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
-    public class SubCategory
-    {
-        [Required(ErrorMessage = "The Sub Category field is required.")]
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
+   
 
 
     

@@ -9,11 +9,13 @@ namespace LLII_Systems.Models
         public List<Item> itemlist { get; set; }
 
         [Required(ErrorMessage = "The Category field is required.")]
-       
+
         public Category item_cat { get; set; }
 
         [Required(ErrorMessage = "The Sub Category field is required.")]
         public SubCategory item_sub_cat { get; set; }
+
+        public Zone zone { get; set; }
 
         public Vendor vendor_id { get; set; }
 
@@ -27,12 +29,14 @@ namespace LLII_Systems.Models
         public int inner_per_case { get; set; }
 
         public int pieces_per_inner { get; set; }
-
+        public int total_unit_per_case { get; set; }
+        public int case_yield { get; set; }
         public int serving_per_case { get; set; }
 
         public int status { get; set; }
+        public decimal weight { get; set; }
+        public decimal weight_per_inner { get; set; }
 
-    
         #endregion
 
         #region Decimal Type
@@ -67,6 +71,8 @@ namespace LLII_Systems.Models
 
         [Required(ErrorMessage = "The UOM field is required.")]
         public string item_uom { get; set; }
+        public string inner_pckg_uom { get; set; }
+        public string base_unit { get; set; }
 
         public string split_code { get; set; }
 
@@ -80,9 +86,11 @@ namespace LLII_Systems.Models
 
         public string issuance_uom { get; set; }
 
-        public string purchase_uom { get; set; }
+        public string purchase_unit { get; set; }
+        public string inner_unit { get; set; }
 
         public string weight_uom { get; set; }
+        public string weight_uom_inner { get; set; }
 
         public string dim_uom { get; set; }
 
@@ -100,7 +108,7 @@ namespace LLII_Systems.Models
 
         public string created_by { get; set; }
 
-        public string weight { get; set; }
+
 
         public string primary_subsidiary { get; set; }
 
@@ -147,7 +155,7 @@ namespace LLII_Systems.Models
 
         public List<Vendor> VendorList { get; set; }
 
-        public List<ItemLog> ItemLogs { get; set; } 
+        public List<ItemLog> ItemLogs { get; set; }
 
 
     }
@@ -156,14 +164,31 @@ namespace LLII_Systems.Models
     {
         public int Id { get; set; }
 
-        public string ItemId { get; set; } 
+        public string ItemId { get; set; }
 
-        public string Action { get; set; } 
+        public string Action { get; set; }
 
         public string Description { get; set; }
 
         public DateTime Date { get; set; }
 
         public User User { get; set; }
+    }
+    public class Category
+    {
+        [Required(ErrorMessage = "The Category field is required.")]
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+    public class SubCategory
+    {
+        [Required(ErrorMessage = "The Sub Category field is required.")]
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+    public class Zone
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -15,14 +15,21 @@
 
     .form-label {
         font-weight: bold;
+        text-transform: uppercase;
+
     }
 
     .form-control {
         width: 100%;
-        padding: 10px;
+        padding: 6px;
         border: 1px solid #ddd;
         border-radius: 5px;
         margin-top: 5px;
+
+    }
+
+    .text-input {
+        text-align:right;
     }
 
     .text-danger {
@@ -77,8 +84,13 @@
                                 <div class="mb-3">
                                     <div class="form-group row">
                                         <div class="col">
+                                            @Html.LabelFor(model => model.mother_code, "Mother Code", new { @class = "form-label" })
+                                            @Html.EditorFor(model => model.mother_code, new { htmlAttributes = new { @class = "form-control text-input", minlength = "4" } })
+                                            @Html.ValidationMessageFor(model => model.mother_code, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col">
                                             @Html.LabelFor(model => model.item_code, "Item Code", new { @class = "form-label" })
-                                            @Html.EditorFor(model => model.item_code, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.item_code, new { htmlAttributes = new { @class = "form-control text-input", minlength = "4" } })
                                             @Html.ValidationMessageFor(model => model.item_code, "", new { @class = "text-danger" })
                                         </div>
                                         <div class="col">
@@ -91,23 +103,21 @@
                                             @Html.ValidationMessageFor(model => model.item_source, "", new { @class = "text-danger" })
 
                                         </div>
-                                        <div class="col">
 
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <div class="form-group row">
                                         <div class="col">
                                             @Html.LabelFor(model => model.item_desc, "Item Description", new { @class = "form-label" })
-                                            @Html.EditorFor(model => model.item_desc, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.EditorFor(model => model.item_desc, new { htmlAttributes = new { @class = "form-control text-input" } })
                                             @Html.ValidationMessageFor(model => model.item_desc, "", new { @class = "text-danger" })
 
                                         </div>
                                         <div class="col">
 
                                             @Html.LabelFor(model => model.shelf_life, "Shelf Life (in days)", new { @class = "form-label" })
-                                            @Html.EditorFor(model => model.shelf_life, new { htmlAttributes = new { @class = "form-control", placeholder = "0", min = "0" } })
+                                            @Html.EditorFor(model => model.shelf_life, new { htmlAttributes = new { @class = "form-control text-input", placeholder = "0", min = "0" } })
                                             @*@Html.ValidationMessageFor(model => model.shelf_life, "", new { @class = "text-danger" })*@
                                         </div>
                                         <div class="col">
@@ -139,11 +149,20 @@
 
                                         </div>
 
-
                                     </div>
+                                </div>
+                                <div class="mb-3">
                                     <div class="form-group row">
                                         <div class="col">
-
+                                            @Html.LabelFor(model => model.zone.Name, "Zone", new { @class = "form-label" })
+                                            @Html.DropDownListFor(m => m.zone.Name, new SelectList(new[]
+                                                {
+                                                    new SelectListItem { Text = "All Stores", Value = "all" },
+                                                    new SelectListItem { Text = "All Visayas", Value = "visayas-only" },
+                                                    new SelectListItem { Text = "All Mindanao", Value = "mindanao-only" },
+                                                    new SelectListItem { Text = "Reusable Store", Value = "reusable-store" }
+                                                }, "Value", "Text"), "Select a zone", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.zone.Name, "", new { @class = "text-danger" })
                                         </div>
                                         <div class="col">
 
@@ -156,17 +175,155 @@
 
 
                                 <div class="mb-4">
+                                    <h4>Unit of Measurement</h4>
+                                    <hr />
                                     <div class="form-group row">
-                                        <div class="col">
+                                        <div class="mb-3">
+                                            <div class="col">
+                                                @Html.LabelFor(model => model.item_uom, "Unit of Measurement", new { @class = "form-label" })
+                                                @Html.DropDownListFor(m => m.item_uom, new SelectList(new[]
+                                                    {
+                                                        new SelectListItem { Text = "Case", Value = "case" },
+                                                        new SelectListItem { Text = "Inner", Value = "in" },
+                                                        new SelectListItem { Text = "Piece", Value = "pc" },
+                                                        new SelectListItem { Text = "Bag", Value = "bg" },
+                                                        new SelectListItem { Text = "Dozen", Value = "dz" },
+                                                        new SelectListItem { Text = "Gallon", Value = "gal" },
+                                                        new SelectListItem { Text = "Jug", Value = "jug" },
+                                                        new SelectListItem { Text = "Kilogram", Value = "kg" },
+                                                        new SelectListItem { Text = "Pad", Value = "pad" },
+                                                        new SelectListItem { Text = "Pack", Value = "pk" },
+                                                        new SelectListItem { Text = "Sheet", Value = "sh" }
 
+                                                    }, "Value", "Text"), "Select UOM", new { @class = "form-control" , @id="item_uom" })
+                                                @Html.ValidationMessageFor(model => model.item_uom, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col">
+
+                                            </div>
+                                            <div class="col">
+
+                                            </div>
                                         </div>
-                                        <div class="col">
-
+                                        <div class="mb-3">
+                                            <div class="form-group row">
+                                                <div class="col">
+                                                    @Html.LabelFor(model => model.pieces_per_inner, "Pieces per Inner", new { @class = "form-label" })
+                                                    @Html.EditorFor(model => model.pieces_per_inner, new { htmlAttributes = new { @class = "form-control text-input", @id = "ïnner" } })
+                                                    @Html.ValidationMessageFor(model => model.pieces_per_inner, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col">
+                                                    @Html.LabelFor(model => model.inner_per_case, "Inner per Case", new { @class = "form-label" })
+                                                    @Html.EditorFor(model => model.inner_per_case, new { htmlAttributes = new { @class = "form-control text-input", @id = "case" } })
+                                                    @Html.ValidationMessageFor(model => model.inner_per_case, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col">
+                                                    @Html.LabelFor(model => model.total_unit_per_case, "Total unit per Case", new { @class = "form-label" })
+                                                    @Html.EditorFor(model => model.total_unit_per_case, new { htmlAttributes = new { @class = "form-control text-input", @min = 0, @id = "piece" } })
+                                                    @Html.ValidationMessageFor(model => model.total_unit_per_case, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col">
+                                        <div class="mb-3">
+                                            <div class="form-group row">
+                                                <div class="col">
+                                                    @Html.LabelFor(model => model.weight, "Weight per Case", new { @class = "form-label" })
+                                                    @Html.EditorFor(model => model.weight, new { htmlAttributes = new { @class = "form-control text-input", @id = "weight_per_case" } })
+                                                    @Html.ValidationMessageFor(model => model.weight, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col">
+                                                    @Html.LabelFor(model => model.weight_uom, "Weight UOM", new { @class = "form-label" })
+                                                    @Html.DropDownListFor(m => m.weight_uom, new SelectList(new[]
+                                               {
+                                                   new SelectListItem { Text = "Kilogram", Value = "kilogram" },
+                                                   new SelectListItem { Text = "Gram", Value = "g" },
+                                                   new SelectListItem { Text = "Pound", Value = "lb" },
+                                                   new SelectListItem { Text = "Ounce", Value = "oz" }
+                                               }, "Value", "Text"), "Select UOM", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.weight_uom, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col">
 
+                                                </div>
+                                            </div>
                                         </div>
+                                        <div class="mb-3">
+                                            <div class="form-group row">
+                                                <div class="col">
+                                                    @Html.LabelFor(model => model.weight_per_inner, "Weight per Inner", new { @class = "form-label" })
+                                                    @Html.EditorFor(model => model.weight_per_inner, new { htmlAttributes = new { @class = "form-control text-input", @id = "weight_per_inner" } })
+                                                    @Html.ValidationMessageFor(model => model.weight_per_inner, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col">
+                                                    @Html.LabelFor(model => model.weight_uom_inner, "Weight UOM", new { @class = "form-label" })
+                                                    @Html.DropDownListFor(m => m.weight_uom_inner, new SelectList(new[]
+                                               {
+                                                   new SelectListItem { Text = "Kilogram", Value = "kg" },
+                                                   new SelectListItem { Text = "Gram", Value = "g" },
+                                                   new SelectListItem { Text = "Pound", Value = "lb" },
+                                                   new SelectListItem { Text = "Ounce", Value = "oz" }
+                                               }, "Value", "Text"), "Select UOM", new { @class = "form-control" , @id="weight_uom_inner"})
+                                                    @Html.ValidationMessageFor(model => model.weight_uom_inner, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col">
 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="form-group row">
+                                                <div class="col">
+                                                    @Html.LabelFor(model => model.inner_pckg_uom, "Inner Packaging UOM", new { @class = "form-label" })
+                                                    @Html.DropDownListFor(m => m.inner_pckg_uom, new SelectList(new[]
+                                               {
+                                                   new SelectListItem { Text = "Bag", Value = "bag" },
+                                                   new SelectListItem { Text = "Bottle", Value = "btl" },
+                                                   new SelectListItem { Text = "Box", Value = "box" },
+                                                   new SelectListItem { Text = "Jug", Value = "jug" },
+                                                   new SelectListItem { Text = "Pack", Value = "pack" },
+                                                   new SelectListItem { Text = "Piece", Value = "pc" },
+                                                   new SelectListItem { Text = "Tank", Value = "tank" },
+                                                   new SelectListItem { Text = "Tray", Value = "tray" }
+                                               }, "Value", "Text"), "Select UOM", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.inner_pckg_uom, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col">
+                                                    @Html.LabelFor(model => model.base_unit, "Base UOM", new { @class = "form-label" })
+                                                    @Html.DropDownListFor(m => m.base_unit, new SelectList(new[]
+                                               {
+                                                   new SelectListItem { Text = "Can", Value = "can" },
+                                                   new SelectListItem { Text = "Kilogram", Value = "kg" },
+                                                   new SelectListItem { Text = "Pound", Value = "lb" },
+                                                   new SelectListItem { Text = "Liter", Value = "lt" },
+                                                   new SelectListItem { Text = "Piece", Value = "pc" },
+
+                                               }, "Value", "Text"), "Select UOM", new { @class = "form-control" , @id="base_unit"})
+                                                    @Html.ValidationMessageFor(model => model.base_unit, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col">
+                                                    @Html.LabelFor(model => model.case_yield, "Case Yield", new { @class = "form-label" })
+                                                    @Html.EditorFor(model => model.case_yield, new { htmlAttributes = new { @class = "form-control text-input", @id = "weight_per_inner" } })
+                                                    @Html.ValidationMessageFor(model => model.case_yield, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="form-group row">
+                                                <div class="col">
+                                                    @Html.LabelFor(model => model.purchase_unit, "Purchase Unit", new { @class = "form-label" })
+                                                    @Html.EditorFor(model => model.purchase_unit, new { htmlAttributes = new { @class = "form-control text-input", @id = "purchase_unit" } })
+                                                    @Html.ValidationMessageFor(model => model.purchase_unit, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col">
+                                                    @Html.LabelFor(model => model.inner_unit, "Inner Unit", new { @class = "form-label" })
+                                                    @Html.EditorFor(model => model.inner_unit, new { htmlAttributes = new { @class = "form-control text-input", @id = "inner_unit" } })
+                                                    @Html.ValidationMessageFor(model => model.inner_unit, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col">
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div style="float:right;margin-bottom:5px;">
@@ -217,95 +374,68 @@
         </div>
     </div>
 </div>
+
 <script>
-        // Script for managing form steps
-        //var currentStep = 1;
-        //var formSteps = document.getElementsByClassName("form-step");
-        //var prevButton = document.getElementById("prevButton");
-        //var nextButton = document.getElementById("nextButton");
-        //var saveButton = document.getElementById("saveButton");
+    // Get references to the input fields
+    var piecesPerInnerInput = document.getElementById('ïnner');
+    var innerPerCaseInput = document.getElementById('case');
+    var totalUnitPerCaseInput = document.getElementById('piece');
+    var weightPerCaseInput = document.getElementById('weight_per_case');
+    var itemUOMInput = document.getElementById('item_uom');
+    var weightUOMInput = document.getElementById('weight_uom');
+    var weightPerInnerInput = document.getElementById('weight_per_inner');
+    var weightUOMInnerInput = document.getElementById('weight_uom_inner');
+    var innerPckgUOMInput = document.getElementById('inner_pckg_uom');
+    var baseUnitInput = document.getElementById('base_unit');
+    var caseYieldInput = document.getElementById('case_yield');
+    var purchaseUnitInput = document.getElementById('purchase_unit');
+    var innerUnitInput = document.getElementById('inner_unit');
 
-        // Hide all form steps except the first one
-        //for (var i = 1; i < formSteps.length; i++) {
-        //    formSteps[i].style.display = "none";
-        //}
 
-        // Function to show the next form step
-        //function nextStep() {
-        //     Validate the current step before proceeding
-        //    if (validateStep(currentStep)) {
-        //        formSteps[currentStep - 1].style.display = "none";
-        //        formSteps[currentStep].style.display = "block";
-        //        currentStep++;
 
-        //         Hide or show previous/next buttons
-        //        if (currentStep === formSteps.length) {
-        //            nextButton.style.display = "none";
-        //            saveButton.style.display = "block";
-        //        } else {
-        //            prevButton.style.display = "block";
-        //            nextButton.style.display = "block";
-        //            saveButton.style.display = "none";
-        //        }
-        //    }
-        //}
-        //function saveStep() {
-        //     //Validate the current step before proceeding
-        //    if (validateStep(currentStep)) {
-        //        formSteps[currentStep - 1].style.display = "none";
-        //        formSteps[currentStep].style.display = "block";
-        //        currentStep++;
+    // Add oninput event handlers to the input fields
+    piecesPerInnerInput.oninput = calculateTotalUnitPerCase;
+    innerPerCaseInput.oninput = calculateTotalUnitPerCase;
+    weightPerCaseInput.oninput = calculateWeightPerInner;
+    itemUOMInput.oninput = ConcatPurchaseUnit;
 
-        //    }
-        //}
+    // Function to calculate the total unit per case
+    function calculateTotalUnitPerCase() {
+        var piecesPerInner = parseInt(piecesPerInnerInput.value);
+        var innerPerCase = parseInt(innerPerCaseInput.value);
 
-        // Function to show the previous form step
-        //function previousStep() {
-        //    formSteps[currentStep - 1].style.display = "none";
-        //    formSteps[currentStep - 2].style.display = "block";
-        //    currentStep--;
+        if (!isNaN(piecesPerInner) && !isNaN(innerPerCase)) {
+            var totalUnitPerCase = piecesPerInner * innerPerCase;
+            totalUnitPerCaseInput.value = totalUnitPerCase;
+           
+        } else {
+            totalUnitPerCaseInput.value = ''; // Reset the value if inputs are not valid
+        }
+    }
+   
+    function calculateWeightPerInner() {
+        var weightPerCase = parseInt(weightPerCaseInput.value);
+        var innerPerCase = parseInt(innerPerCaseInput.value);
+       
+        if (!isNaN(innerPerCase) && !isNaN(weightPerCase)) {
+            var weightPerInner = weightPerCase / innerPerCase;         
+            weightPerInnerInput.value = weightPerInner.toFixed(2);;
+        } else {
+            weightPerInnerInput.value = ''; // Reset the value if inputs are not valid
+        }
+    }
 
-        //     Hide or show previous/next buttons
-        //    if (currentStep === 1) {
-        //        prevButton.style.display = "none";
-        //    } else {
-        //        prevButton.style.display = "block";
-        //    }
+    function ConcatPurchaseUnit() { // A-DH UOM-TotalUnitperCaseBaseUnit
 
-        //    nextButton.style.display = "block";
-        //    saveButton.style.display = "none";
-        //}
+        if (itemUOMInput.value && totalUnitPerCaseInput.value && baseUnitInput.value) {
+            var purchaseUnit = itemUOMInput.value + '-' + totalUnitPerCaseInput.value + baseUnitInput.value;
+            purchaseUnitInput.value = purchaseUnit.toUpperCase();
+        } else {
+            purchaseUnitInput.value = ''; // Reset the value if inputs are not valid
+        }
+    }
+    function ConcatInnerUnit() { // G-B/FH InnerPackingUOM-PcsPerInner/WeightPerinnerBaseUnit
 
-        // Function to validate the current step
-        //function validateStep() {
-        //    var isValid = true;
-        //    var currentForm = formSteps[step - 1];
-        //    var inputFields = currentForm.getElementsByTagName("input");
-        //    var selectFields = currentForm.getElementsByTagName("select");
-
-        //     //Validate input fields
-        //    for (var i = 0; i < inputFields.length; i++) {
-        //        var inputField = inputFields[i];
-        //        if (inputField.value.trim() === "") {
-        //            isValid = false;
-        //            inputField.classList.add("is-invalid");
-        //        } else {
-        //            inputField.classList.remove("is-invalid");
-        //        }
-        //    }
-
-        //     //Validate dropdowns
-        //    for (var i = 0; i < selectFields.length; i++) {
-        //        var selectField = selectFields[i];
-        //        if (selectField.value === "") {
-        //            isValid = false;
-        //            selectField.classList.add("is-invalid");
-        //        } else {
-        //            selectField.classList.remove("is-invalid");
-        //        }
-        //    }
-
-        //    return isValid;
-        //}
+      
+    }
 </script>
-
